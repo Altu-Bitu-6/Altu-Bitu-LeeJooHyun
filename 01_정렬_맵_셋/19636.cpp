@@ -22,7 +22,9 @@ tuple<int, int, int> calculateDiet(int w, int b, int diet_in, int t, int d, int 
         b1_change = 0;
         b2_change = diet_in - b2 - a;
 
-        if (abs(b2_change) > t) b2 += floor(b2_change) / 2;
+        if (abs(b2_change) > t) {
+            b2 += floor(b2_change) / 2;
+        }
     }
 
     return {w1, w2, b2};
@@ -43,14 +45,21 @@ int main() {
     int w1 = get<0>(result), b1 = b;
     int w2 = get<1>(result), b2 = get<2>(result);
 
-    if (w1 <= 0) cout << "Danger Diet" << '\n';
-    else cout << w1 << ' ' << b1 << ' ' << '\n';
+    if (w1 <= 0) {
+        cout << "Danger Diet" << '\n';
+    } else {
+        cout << w1 << ' ' << b1 << ' ' << '\n';
+    }
 
-    if (w1 <= 0 || b2 <= 0) cout << "Danger Diet" << '\n';
-    else {
+    if (w1 <= 0 || b2 <= 0) {
+        cout << "Danger Diet" << '\n';
+    } else {
         cout << w2 << ' ' << b2 << ' ';
-        if (b2 < b) cout << "YOYO";
-        else cout << "NO";
+        if (b2 < b) {
+            cout << "YOYO";
+        } else {
+            cout << "NO";
+        }
     }
 
     return 0;
