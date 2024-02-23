@@ -1,16 +1,15 @@
 #include <iostream>
+#include <tuple>
 #include <cmath>
 
 using namespace std;
 
-void calculateDiet(int w, int b, int diet_in, int t, int d, int a) {
+tuple<int, int, int> calculateDiet(int w, int b, int diet_in, int t, int d, int a) {
     int w1, w2;
     int b1, b2;
-    int result1, result2;
 
     w1 = w; w2 = w;
     b1 = b; b2 = b;
-    result1 = 0; result2 = 0;
 
     for (int i = 0; i < d; i++) {
         int b_change1, b_change2;
@@ -24,20 +23,9 @@ void calculateDiet(int w, int b, int diet_in, int t, int d, int a) {
         b2_change = diet_in - b2 - a;
 
         if (abs(b2_change) > t) b2 += floor(b2_change) / 2;
-        
-        if (w1 <= 0 || b1 <= 0) result1 = -1;
-        if (w2 <= 0 || b2 <= 0) result2 = -1;
     }
 
-    if (result1 == -1) cout << "Danger Diet" << endl;
-    else cout << w1 << ' ' << b1 << endl;
-
-    if (result2 == -1) cout << "Danger Diet";
-    else {
-        cout << w2 << ' ' << b2;
-        if (b - b2 > 0) cout << ' ' << "YOYO";
-        else cout << ' ' << "NO";
-    }
+    return {w1, w2, b2};
 }
 
 int main() {
@@ -50,7 +38,20 @@ int main() {
     cin >> w >> b >> t;
     cin >> d >> diet_in >> a;
 
-    calculateDiet(w, b, diet_in, t, d, a);
+    tuple<int, int, int> result;
+
+    int w1 = get<0>(result), b1 = b;
+    int w2 = get<1>(result), b2 = get<2>(result);
+
+    if (w1 <= 0) cout << "Danger Diet" << '\n';
+    else cout << w1 << ' ' << b1 << ' ' << '\n';
+
+    if (w1 <= 0 || b2 <= 0) cout << "Danger Diet" << '\n';
+    else {
+        cout << w2 << ' ' << b2 << ' ';
+        if (b2 < b) cout << "YOYO";
+        else cout << "NO";
+    }
 
     return 0;
 }
