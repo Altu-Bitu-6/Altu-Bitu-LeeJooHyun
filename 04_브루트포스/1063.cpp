@@ -5,43 +5,34 @@ using namespace std;
 // 킹과 돌을 움직이는 함수입니다.
 // input에 따라 움직이는데, 한계점에 닿았을 경우 움직이지 않습니다.
 string moves(string chess, string &input){
+    string before_chess = chess;
+
     if (input == "R") {
-        if (chess[0] != 'H') {
-            chess[0] += 1;
-        }
+        chess[0] += 1;
     } else if (input == "L") {
-        if (chess[0] != 'A') {
-            chess[0] -= 1;
-        }
+        chess[0] -= 1;
     } else if (input == "B") {
-        if (chess[1] != '1') {
-            chess[1] -= 1;
-        }
+        chess[1] -= 1;
     } else if (input == "T") {
-        if (chess[1] != '8') {
-            chess[1] += 1;
-        }
+        chess[1] += 1;
     } else if (input == "RT") {
-        if (chess[0] != 'H' && chess[1] != '8') {
-            chess[0] += 1;
-            chess[1] += 1;
-        }
+        chess[0] += 1;
+        chess[1] += 1;
     } else if (input == "LT") {
-        if (chess[0] != 'A' && chess[1] != '8') {
-            chess[0] -= 1;
-            chess[1] += 1;
-        }
+        chess[0] -= 1;
+        chess[1] += 1;
     } else if (input == "RB") {
-        if (chess[0] != 'H' && chess[1] != '1') {
-            chess[0] += 1;
-            chess[1] -= 1;
-        }
+        chess[0] += 1;
+        chess[1] -= 1;
     } else if (input == "LB") {
-        if (chess[0] != 'A' && chess[1] != '1') {
-            chess[0] -= 1;
-            chess[1] -= 1;
-        }
+        chess[0] -= 1;
+        chess[1] -= 1;
     }
+
+    if (chess[0] < 'A' || chess[0] > 'H' || chess[1] < '1' || chess[1] > '8') {
+        return before_chess;
+    }
+    
     return chess;
 }
 
